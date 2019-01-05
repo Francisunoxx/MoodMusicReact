@@ -1,10 +1,112 @@
-html{
+.divDashboardContainer{
     height: 100%;
     width: 100%;
-    background: url('../assets/running_dog.gif') center no-repeat;
-    background-size: 100%;
 }
 
-.a{
-    background-color: blue;
+.divDashboardContainer > .divLoginMessage{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.divLoginMessage > h1{
+    margin: 0;
+    font-size: 50px;
+}
+
+.divLoginMessage > h4{
+    font-size: 20px;
+}
+
+.divLoginMessage > button{
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 16px;
+    border: none;
+    background-color: #8800FF;
+    color: white;
+}
+
+.divDashboardContainer > .divLoginContainer{
+    display: none;
+    height: 40%;
+    width: 25%;
+    border-radius: 3px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.divLoginContainer > input{
+    height: 15%;
+    width: 80%;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    border: none;
+}
+
+.divLoginContainer > button{
+    height: 15%;
+    width: 40%;
+    font-size: 80%;
+    border-radius: 3px;
+    border: none;
+    background-color: #8800FF;
+}
+
+ .divLoginContainer > .divMoodIcon, .divLoginContainer > .divMoodHeader{
+    height: 10%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.divMoodIcon > img{
+    height: 50px;
+}
+
+.divDashboardContainer > .divMoodRowOne,
+.divDashboardContainer > .divMoodRowTwo{
+    width: 100%;
+    display: flex;
+}
+
+.divMood{
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.divMoodRowTwo > .divMood{
+    margin-top: 5%;
+}
+
+.divMood > img{
+    height: 150px;
+    cursor: pointer;
+}
+
+.divMood > img:hover{
+    transform: scale(1.1);
 }
