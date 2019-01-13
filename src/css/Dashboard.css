@@ -4,7 +4,7 @@ html, body{
     height: 100%;
     width: 100%;
     color: white;
-    overflow-y: hidden;
+    background-image: url('../assets/chalkboard.jpg');
 }
 
 section{
@@ -26,7 +26,8 @@ h1, h4{
     width: 100%;
     display: flex;
     align-items: center;
-    background-color: #030303;
+    border-bottom: 1px solid #61892F;
+    /*background-color: #030303;*/
 }
 
 .divDashboardImg{
@@ -38,7 +39,7 @@ h1, h4{
 
 .divDashboardImg > img{
     width: 100%;
-    height: 25px;
+    height: 35px;
 }
 
 .divDashboardMenu{
@@ -69,8 +70,9 @@ h1, h4{
     height: 50%;
     width: 50%;
     border-radius: 3px;
-    border: none;
-    background-color: #171717;
+    border: 1px solid;
+    border-color: #61892F;
+    background-color: #292929;
 }
 
 .divDashboardLogin{
@@ -89,15 +91,14 @@ h1, h4{
 .divDashboardContainer > .divDashboardBody{
     height: 90%;
     width: 100%;
-    background-color: #171717;
+    /*background-color: #171717;*/
     display: flex;
     flex-direction: row;
 }
 
 .divDashboardBody > .divMusic{
     height: 100%;
-    width: 80%;
-    background-color: crimson;
+    width: 75%;
 }
 
 .divMusic > .divRecentlyPlayed,
@@ -120,12 +121,126 @@ h1, h4{
 
 .divDashboardBody > .divTopMusic{
     height: 100%;
-    width: 20%;
-    background-color: rebeccapurple;
+    width: 25%;
+    display: flex;
+    align-items: center;
+}
+
+.divTopMusic > .divTopMusicBody{
+    height: 90%;
+    width: 90%;
+    background-color: #363636;
+    border-radius: 9px;
     display: flex;
     justify-content: center;
 }
 
-.divTopMusic > h1{
+.divTopMusicBody > h1{
     padding-top: 20px;
+}
+
+.divAccount{
+    height: 50%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 30%;
+    left: 35%;
+    background: rgba(41,41,41,0.5);
+    border-radius: 3px;
+}
+
+.divAccount > .divRegister{
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.divRegister > button{
+    height: 40px;
+    width: 60%;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    border: none;
+    background: #86C232;
+    color: white;
+}
+
+.divRegister > h2{
+    margin: 1px;
+}
+
+.divRegister > h5{
+    margin: 15px;
+    color: #6B6E70;
+}
+
+.divAccount > .divLogin{
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.divLogin > .divCredentials {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.divCredentials > input[type='text'], input[type='password']{
+    height: 30px;
+    width: 80%;
+    border-radius: 3px;
+    border: none;
+    margin: 5px;
+}
+
+.divLogin > .divSubmit {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.divSubmit > .divHelp{
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+}
+
+.divHelp > div{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    margin-left: 45px;
+    color: #6B6E70;
+}
+
+.divSubmit > button{
+    height: 30px;
+    width: 20%;
+    border-radius: 3px;
+    border: none;
+    background: #86C232;
+    color: white;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: 40px;
 }
