@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 html, body{
+=======
+html, body, section{
+>>>>>>> 0c68ec88... fixed untracked files
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
     color: white;
+<<<<<<< HEAD
     background-image: url('../assets/chalkboard.jpg');
 }
 
@@ -12,15 +17,26 @@ section{
     width: 100%;
 }
 
+=======
+    overflow-y: hidden;
+    background-image: url('../assets/chalkboard.jpg');
+}
+
+>>>>>>> 0c68ec88... fixed untracked files
 h1, h4{
     margin: 0;
 }
 
+<<<<<<< HEAD
 .divDashboardContainer{
+=======
+div{
+>>>>>>> 0c68ec88... fixed untracked files
     height: 100%;
     width: 100%;
 }
 
+<<<<<<< HEAD
 .divDashboardContainer > .divDashboardHeader{
     height: 10%;
     width: 100%;
@@ -86,6 +102,11 @@ h1, h4{
 .divDashboardLogin > img{
     height: 30px;
     cursor: pointer;
+=======
+.divDashboardContainer{
+    height: 100%;
+    width: 100%;
+>>>>>>> 0c68ec88... fixed untracked files
 }
 
 .divDashboardContainer > .divDashboardBody{
@@ -139,6 +160,7 @@ h1, h4{
     padding-top: 20px;
 }
 
+<<<<<<< HEAD
 .divAccount{
     height: 50%;
     width: 30%;
@@ -244,3 +266,5 @@ h1, h4{
     margin-left: auto;
     margin-right: 40px;
 }
+=======
+>>>>>>> 0c68ec88... fixed untracked files

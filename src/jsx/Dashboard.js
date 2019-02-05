@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import style from '../css/Dashboard.css';
+<<<<<<< HEAD
 import rock from '../assets/maloik.svg';
 import arrowDown from '../assets/sort-down.svg';
 import login from '../assets/login1.svg';
@@ -23,6 +24,20 @@ export default class Dashboard extends Component {
                         <img src={login} />
                     </div>
                 </div>
+=======
+import Header from './components/Header';
+
+export default class Dashboard extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <div className={style.divDashboardContainer}>
+                <Header />
+>>>>>>> 0c68ec88... fixed untracked files
                 <div className={style.divDashboardBody}>
                     <div className={style.divMusic}>
                         <div className={style.divRecentlyPlayed}>
@@ -41,6 +56,7 @@ export default class Dashboard extends Component {
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
                 <div className={style.divAccount}>
                     <div className={style.divRegister}>
                         <h2>WELCOME TO ROCKTIFY</h2>
@@ -66,6 +82,8 @@ export default class Dashboard extends Component {
                         </div>
                     </div>
                 </div>
+=======
+>>>>>>> 0c68ec88... fixed untracked files
             </div>
         )
     }
