@@ -28,7 +28,11 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+<<<<<<< HEAD
     "npm": "^6.7.0",
+=======
+    "font-awesome": "^4.7.0",
+>>>>>>> 78e6ffd0... Added dependencies
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-router": "^4.3.1",
