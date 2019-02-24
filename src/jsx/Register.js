@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import style from '../css/Register.css';
 import Header from './components/Header';
-import { ifError } from 'assert';
 
 export default class Register extends Component {
 
@@ -17,11 +16,13 @@ export default class Register extends Component {
         this.handleRegisterButton = this.handleRegisterButton.bind(this);
     }
 
+    validateEmail(email) {
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
+
     validateInputFields(data) {
         let isValid = false;
-        let isEmpty = false;
-        let hasNumbers = false;
-        let hasCharacters = false;
         let errorsCopy = this.state.errors;
         let name = '';
         const firstName = 'firstName';
@@ -55,45 +56,68 @@ export default class Register extends Component {
             }
 
             if (data[val].length == 0) {
-                isEmpty = true;
-                isValid = false;
-            }
-            else if (data[val].match('^[0-9]$')) {
-                hasNumbers = true;
-                isValid = false;
-            }
-            else if (data[val].match('^[!@#$%^&*(),?":{}|<>]$')) {
-                hasCharacters = true;
-                isValid = false;
-            }
-            else if (data[val].match('[!@#$%^&*(),?":{}|<>0-9]')){
-                hasNumbers = true;
-                hasCharacters = true;
-                isValid = false;
-            }
-            else {
-                isValid = true;
-            }
-
-            if (isEmpty && !hasNumbers && !hasCharacters) {
                 errorsCopy[val + 'Error'] = name + ' is required';
-                isEmpty = false;
-            }
-            else if (!isEmpty && hasNumbers && !hasCharacters) {
-                errorsCopy[val + 'Error'] = name + ' should not contain numbers';
-                hasNumbers = false;
-            }
-            else if (!isEmpty && !hasNumbers && hasCharacters) {
-                errorsCopy[val + 'Error'] = name + ' should not contain characters';
-                hasCharacters = false;
-            }
-            else if (!isEmpty && hasNumbers && hasCharacters) {
-                errorsCopy[val + 'Error'] = name + ' should not contain mixed characters';
-                hasNumbers = false;
-                hasCharacters = false;
+                isValid = false;
             }
             else {
-                errorsCopy[val + 'Error'] = '';
+                if (val === firstName || val === lastName) {
+                    if (data[val].match('^[0-9]$')) {
+                        isValid = false;
+                        errorsCopy[val + 'Error'] = name + ' should not contain numbers';
+                    }
+                    else if (data[val].match('[^[!@#$%^&*(),?":{}|<>]$]')) {
+                        isValid = false;
+                        errorsCopy[val + 'Error'] = name + ' should not contain characters';
+                    }
+                    else if (data[val].match('[!@#$%^&*(),?":{}|<>0-9]')) {
+                        isValid = false;
+                        errorsCopy[val + 'Error'] = name + ' should not contain mixed characters';
+                    }
+                    else {
+                        isValid = true;
+                        errorsCopy[val + 'Error'] = '';
+                    }
+                }
+                else if (val === userName) {
+                    if (data[val].match('[^[!@#$%^&*(),?":{}|<>]$]')) {
+                        isValid = false;
+                        errorsCopy[val + 'Error'] = name + ' should not contain characters';
+                    }
+                    else {
+                        isValid = true;
+                        errorsCopy[val + 'Error'] = '';
+                    }
+                }
+                else if (val === email) {
+                    if (!this.validateEmail(data[val])) {
+                        isValid = false;
+                        errorsCopy[val + 'Error'] = data[val] + ' is not a valid Email';
+                    }
+                    else {
+                        isValid = true;
+                        errorsCopy[val + 'Error'] = '';
+                    }
+                }
+                else if (val === password) {
+                    if (data[val].length < 5) {
+                        isValid = false;
+                        errorsCopy[val + 'Error'] = name + ' should be atleast 5 characters';
+                    }
+                    else {
+                        isValid = true;
+                        errorsCopy[val + 'Error'] = '';
+                    }
+                }
+                else if (val === confirmPassword) {
+                    if (this.state.fields.password != this.state.fields.confirmPassword) {
+                        isValid = false;
+                        errorsCopy[val + 'Error'] = name + ' should be match with Password';
+                    }
+                    else {
+                        isValid = true;
+                        errorsCopy[val + 'Error'] = '';
+                    }
+                }
             }
 
             this.setState({ errors: errorsCopy })
@@ -104,7 +128,7 @@ export default class Register extends Component {
         const name = event.target.name;
         const value = event.target.value;
         let obj = this.state.fields;
-
+        
         for (const key of Object.keys(obj)) {
             if (name === key) {
                 obj[name] = value;
@@ -211,7 +235,7 @@ export default class Register extends Component {
                                     <div className={style.divInput}>
                                         <input
                                             type='password'
-                                            name='confirmPasssword'
+                                            name='confirmPassword'
                                             onChange={(event) => this.handleUserInput(event)}></input>
                                     </div>
                                     <div className={style.divInputError}>

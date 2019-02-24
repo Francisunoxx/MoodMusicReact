@@ -52,6 +52,9 @@ module.exports = {
                         options: {
                             bypassOnDebug: true, // webpack@1.x
                             disable: true, // webpack@2.x and newer
+                            webp: {
+                                quality: 75
+                            },
                             gifsicle: {
                                 optimizationLevel: 7,
                                 interlaced: false

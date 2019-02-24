@@ -33,10 +33,14 @@
     "npm": "^6.7.0",
 =======
     "font-awesome": "^4.7.0",
+<<<<<<< HEAD
 >>>>>>> 78e6ffd0... Added dependencies
 =======
     "font-awesome": "^4.7.0",
 >>>>>>> 0c68ec88... fixed untracked files
+=======
+    "prop-types": "^15.6.2",
+>>>>>>> 135a774a... Finished registration validation
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-router": "^4.3.1",
