@@ -4,7 +4,7 @@ import rock from '../../assets/maloik.svg';
 import arrowDown from '../../assets/sort-down.svg';
 import AccountModal from './AccountModal';
 
-const Header = () => {
+const Header = (props) => {
     return (
         <div className={style.divHeaderContainer}>
             <div className={style.divHeaderImg}>

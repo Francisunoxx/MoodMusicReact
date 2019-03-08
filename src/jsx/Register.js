@@ -1,19 +1,48 @@
 import React, { Component } from 'react';
 import style from '../css/Register.css';
 import Header from './components/Header';
+import PropTypes from 'prop-types';
+import { Provider, connect } from 'react-redux';
+import store from '../Store.js';
+import { test } from '../actions/ActionRegister.js';
+//const MySwal = withReactContent(Swal);
 
-export default class Register extends Component {
+class Register extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
             fields: { firstName: '', lastName: '', userName: '', email: '', password: '', confirmPassword: '' },
-            errors: { firstNameError: '', lastNameError: '', userNameError: '', emailError: '', passwordError: '', confirmPasswordError: '' }
+            errors: { firstNameError: '', lastNameError: '', userNameError: '', emailError: '', passwordError: '', confirmPasswordError: '' },
+            isValid: false
         }
 
         this.handleUserInput = this.handleUserInput.bind(this);
         this.handleRegisterButton = this.handleRegisterButton.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.test();
+    }
+
+    handleUserInput(event) {
+        const name = event.target.name;
+        const value = event.target.value;
+        let obj = this.state.fields;
+
+        for (const key of Object.keys(obj)) {
+            if (name === key) {
+                obj[name] = value;
+            }
+        }
+
+        this.setState({ fields: obj });
+    }
+
+    handleRegisterButton(event) {
+        event.preventDefault();
+        this.validateInputFields(this.state.fields);
     }
 
     validateEmail(email) {
@@ -22,9 +51,10 @@ export default class Register extends Component {
     }
 
     validateInputFields(data) {
-        let isValid = false;
+        let { isValid } = this.state.isValid;
         let errorsCopy = this.state.errors;
         let name = '';
+
         const firstName = 'firstName';
         const lastName = 'lastName';
         const userName = 'userName';
@@ -33,7 +63,6 @@ export default class Register extends Component {
         const confirmPassword = 'confirmPassword';
 
         Object.keys(data).forEach((val, index, arr) => {
-
             switch (val) {
                 case firstName:
                     name = 'First Name';
@@ -113,143 +142,139 @@ export default class Register extends Component {
                         isValid = false;
                         errorsCopy[val + 'Error'] = name + ' should be match with Password';
                     }
-                    else {
+                    else if (this.state.fields.password == this.state.fields.confirmPassword) {
                         isValid = true;
                         errorsCopy[val + 'Error'] = '';
                     }
                 }
             }
 
+            /*if (Object.keys(data).length == index + 1 && !isValid) {
+                MySwal.fire({
+                    title: <p>Hello World</p>,
+                    type: 'error'
+                })
+            }*/
+
             this.setState({ errors: errorsCopy })
         });
     }
 
-    handleUserInput(event) {
-        const name = event.target.name;
-        const value = event.target.value;
-        let obj = this.state.fields;
-        
-        for (const key of Object.keys(obj)) {
-            if (name === key) {
-                obj[name] = value;
-            }
-        }
-
-        this.setState({ fields: obj });
-    }
-
-    handleRegisterButton(event) {
-        event.preventDefault();
-        this.validateInputFields(this.state.fields);
-    }
-
     render() {
         return (
-            <div>
-                <Header />
-                <div className={style.divRegisterContainer}>
-                    <div className={style.divRegisterHeader}>
-                        <h1>Sign up today, it's free.</h1>
-                    </div>
-                    <div className={style.divRegisterBody}>
-                        <div className={style.divRegisterInput}>
-                            <div className={style.divRegisterInputBody}>
-                                <div>
-                                    <div className={style.divLabel}>
-                                        <label>FIRST NAME</label>
-                                    </div>
-                                    <div className={style.divInput}>
-                                        <input
-                                            type='text'
-                                            name='firstName'
-                                            onChange={(event) => this.handleUserInput(event)}></input>
-                                    </div>
-                                    <div className={style.divInputError}>
-                                        <h5>{this.state.errors.firstNameError}</h5>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className={style.divLabel}>
-                                        <label>LAST NAME</label>
-                                    </div>
-                                    <div className={style.divInput}>
-                                        <input
-                                            type='text'
-                                            name='lastName'
-                                            onChange={(event) => this.handleUserInput(event)}></input>
-                                    </div>
-                                    <div className={style.divInputError}>
-                                        <h5>{this.state.errors.lastNameError}</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className={style.divRegisterInputBody}>
-                                <div>
-                                    <div className={style.divLabel}>
-                                        <label>USER NAME</label>
-                                    </div>
-                                    <div className={style.divInput}>
-                                        <input
-                                            type='text'
-                                            name='userName'
-                                            onChange={(event) => this.handleUserInput(event)}></input>
-                                    </div>
-                                    <div className={style.divInputError}>
-                                        <h5>{this.state.errors.userNameError}</h5>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className={style.divLabel}>
-                                        <label>EMAIL</label>
-                                    </div>
-                                    <div className={style.divInput}>
-                                        <input
-                                            type='text'
-                                            name='email'
-                                            onChange={(event) => this.handleUserInput(event)}></input>
-                                    </div>
-                                    <div className={style.divInputError}>
-                                        <h5>{this.state.errors.emailError}</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className={style.divRegisterInputBody}>
-                                <div>
-                                    <div className={style.divLabel}>
-                                        <label>PASSWORD</label>
-                                    </div>
-                                    <div className={style.divInput}>
-                                        <input
-                                            type='password'
-                                            name='password'
-                                            onChange={(event) => this.handleUserInput(event)}></input>
-                                    </div>
-                                    <div className={style.divInputError}>
-                                        <h5>{this.state.errors.passwordError}</h5>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className={style.divLabel}>
-                                        <label>CONFIRM PASSWORD</label>
-                                    </div>
-                                    <div className={style.divInput}>
-                                        <input
-                                            type='password'
-                                            name='confirmPassword'
-                                            onChange={(event) => this.handleUserInput(event)}></input>
-                                    </div>
-                                    <div className={style.divInputError}>
-                                        <h5>{this.state.errors.confirmPasswordError}</h5>
-                                    </div>
-                                </div>
-                            </div>
+            <Provider store={store}>
+                <div>
+                    <Header />
+                    <div className={style.divRegisterContainer}>
+                        <div className={style.divRegisterHeader}>
+                            <h1>Sign up today, it's free.</h1>
                         </div>
-                        <div className={style.divRegisterButtonBody}>
-                            <button onClick={(event) => this.handleRegisterButton(event)}>REGISTER NOW!</button>
+                        <div className={style.divRegisterBody}>
+                            <div className={style.divRegisterInput}>
+                                <div className={style.divRegisterInputBody}>
+                                    <div>
+                                        <div className={style.divLabel}>
+                                            <label>FIRST NAME</label>
+                                        </div>
+                                        <div className={style.divInput}>
+                                            <input
+                                                type='text'
+                                                name='firstName'
+                                                onChange={(event) => this.handleUserInput(event)}></input>
+                                        </div>
+                                        <div className={style.divInputError}>
+                                            <h5>{this.state.errors.firstNameError}</h5>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div className={style.divLabel}>
+                                            <label>LAST NAME</label>
+                                        </div>
+                                        <div className={style.divInput}>
+                                            <input
+                                                type='text'
+                                                name='lastName'
+                                                onChange={(event) => this.handleUserInput(event)}></input>
+                                        </div>
+                                        <div className={style.divInputError}>
+                                            <h5>{this.state.errors.lastNameError}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={style.divRegisterInputBody}>
+                                    <div>
+                                        <div className={style.divLabel}>
+                                            <label>USER NAME</label>
+                                        </div>
+                                        <div className={style.divInput}>
+                                            <input
+                                                type='text'
+                                                name='userName'
+                                                onChange={(event) => this.handleUserInput(event)}></input>
+                                        </div>
+                                        <div className={style.divInputError}>
+                                            <h5>{this.state.errors.userNameError}</h5>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div className={style.divLabel}>
+                                            <label>EMAIL</label>
+                                        </div>
+                                        <div className={style.divInput}>
+                                            <input
+                                                type='text'
+                                                name='email'
+                                                onChange={(event) => this.handleUserInput(event)}></input>
+                                        </div>
+                                        <div className={style.divInputError}>
+                                            <h5>{this.state.errors.emailError}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={style.divRegisterInputBody}>
+                                    <div>
+                                        <div className={style.divLabel}>
+                                            <label>PASSWORD</label>
+                                        </div>
+                                        <div className={style.divInput}>
+                                            <input
+                                                type='password'
+                                                name='password'
+                                                onChange={(event) => this.handleUserInput(event)}></input>
+                                        </div>
+                                        <div className={style.divInputError}>
+                                            <h5>{this.state.errors.passwordError}</h5>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div className={style.divLabel}>
+                                            <label>CONFIRM PASSWORD</label>
+                                        </div>
+                                        <div className={style.divInput}>
+                                            <input
+                                                type='password'
+                                                name='confirmPassword'
+                                                onChange={(event) => this.handleUserInput(event)}></input>
+                                        </div>
+                                        <div className={style.divInputError}>
+                                            <h5>{this.state.errors.confirmPasswordError}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={style.divRegisterButtonBody}>
+                                <button onClick={(event) => this.handleRegisterButton(event)}>REGISTER NOW!</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </Provider>
         )
     }
 }
+
+const mapStateToProps = state => ({
+    transaction: state.register.transaction
+})
+export default Register
+//export default connect(mapStateToProps, { test })(Register);
