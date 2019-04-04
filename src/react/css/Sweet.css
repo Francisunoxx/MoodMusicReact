@@ -1,0 +1,16 @@
+.swal2-container {
+    overflow-y: hidden !important;
+    height: 50px;
+    width: 20%;
+    margin-left: auto;
+    margin-top: auto;
+    background-color: transparent !important; 
+}
+
+.swal2-content{
+    width: 0;
+}
+
+.swal2-popup{
+    margin-left: auto;
+}

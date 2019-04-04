@@ -1,0 +1,71 @@
+html,
+body,
+section {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    color: white;
+    overflow-y: hidden;
+    background-image: url('../assets/chalkboard.jpg');
+}
+
+h1,
+h4 {
+    margin: 0;
+}
+
+.divDashboardContainer {
+    height: 100%;
+    width: 100%;
+}
+
+.divDashboardContainer>.divDashboardBody {
+    height: 90%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.divDashboardBody>.divMusic {
+    height: 100%;
+    width: 75%;
+}
+
+.divMusic>.divRecentlyPlayed,
+.divMusic>.divMyPlaylists {
+    height: 30%;
+    width: 100%;
+}
+
+.divRecentlyPlayed>h1,
+.divMyPlaylists>h1,
+.divNewReleases>h1 {
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.divMusic>.divNewReleases {
+    height: 50%;
+    width: 100%;
+}
+
+.divDashboardBody>.divTopMusic {
+    height: 100%;
+    width: 25%;
+    display: flex;
+    align-items: center;
+}
+
+.divTopMusic>.divTopMusicBody {
+    height: 90%;
+    width: 90%;
+    background-color: #363636;
+    border-radius: 9px;
+    display: flex;
+    justify-content: center;
+}
+
+.divTopMusicBody>h1 {
+    padding-top: 20px;
+}
